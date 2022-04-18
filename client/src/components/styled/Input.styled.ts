@@ -12,13 +12,13 @@ export const StyledInput = styled.div`
   }
 
   & p {
-    color: #ff2869;
+    color: ${({ theme }) => theme.color.error};
     font-size: 0.7rem;
     margin-bottom: 0.3rem;
     margin-left: 1px;
   }
   & input {
-    border: 1px solid #e5e5e5;
+    border: 1px solid ${({ theme }) => theme.color.disabled};
     border-radius: 5px;
     padding: 0.5rem;
     font-size: 0.8rem;

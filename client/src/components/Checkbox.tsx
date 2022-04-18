@@ -8,7 +8,7 @@ interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const Checkbox: React.FC<CheckboxProps> = ({ label, id, isChecked, defaultChecked, handleChange }) => {
+export const Checkbox: React.FC<CheckboxProps> = ({ label, isChecked, defaultChecked, handleChange }) => {
   return (
     <StyledCheckbox>
       <label htmlFor={label}>{label}</label>

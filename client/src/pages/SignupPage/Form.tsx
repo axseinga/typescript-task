@@ -51,7 +51,7 @@ export const Form: React.FC = () => {
         />
         <Checkbox label='Want to receive a newsletter?' isChecked={false} handleChange={() => console.log('handling change')} />
       </div>
-      <Button type='submit' base handleClick={() => console.log('handling this click')}>
+      <Button type='submit' primary handleClick={() => console.log('handling this click')}>
         Submit
       </Button>
     </StyledForm>

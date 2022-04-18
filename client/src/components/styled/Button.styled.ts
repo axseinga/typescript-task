@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 type Props = {
   disabled?: boolean;
-  base?: boolean; // why it is not possible to use keyword default? is it reserved word?
+  primary?: boolean;
 };
 
 export const StyledButton = styled.button<Props>`
@@ -14,21 +14,21 @@ export const StyledButton = styled.button<Props>`
   padding: 0.5rem 1.5rem;
 
   ${props =>
-    props.base &&
+    props.primary &&
     css`
-      background-color: #6e59ce;
-      color: #ffffff;
+      background-color: ${({ theme }) => theme.color.primary};
+      color: ${({ theme }) => theme.color.white};
       &:hover {
-        background-color: #5242a5;
+        background-color: ${({ theme }) => theme.color.hover};
       }
       &:focus,
       &:active {
-        background-color: #5034db;
+        background-color: ${({ theme }) => theme.color.active};
       }
     `}
   ${props =>
     props.disabled &&
     css`
-      background-color: #e5e5e5;
+      background-color: ${({ theme }) => theme.color.disabled}; ;
     `}
 `;

@@ -5,13 +5,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   type: 'button' | 'submit' | 'reset';
   handleClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  base?: boolean;
+  primary?: boolean;
   disabled?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({ type, children, handleClick, disabled, base }) => {
+export const Button: React.FC<ButtonProps> = ({ type, children, handleClick, disabled, primary }) => {
   return (
-    <StyledButton type={type} onClick={handleClick} disabled={disabled} base={base}>
+    <StyledButton type={type} onClick={handleClick} disabled={disabled} primary={primary}>
       {children ? <div>{children}</div> : null}
     </StyledButton>
   );

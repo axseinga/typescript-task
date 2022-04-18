@@ -7,12 +7,12 @@ export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   min-width: 400px;
-  box-shadow: 8px 9px 13px -4px rgba(159, 143, 184, 0.56);
+  box-shadow: ${({ theme }) => theme.shadow.box};
 
   & h1 {
     font-size: 1.5rem;
     text-align: center;
-    text-shadow: 2px 2px 2px #e3d1f0;
+    text-shadow: ${({ theme }) => theme.shadow.text};
   }
 
   & div {
