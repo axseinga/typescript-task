@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyledForm } from './styled/Form.styled';
 import { Input } from '../../components/Input';
+import { Checkbox } from '../../components/Checkbox';
 
 export const Form: React.FC = () => {
   return (
@@ -47,6 +48,7 @@ export const Form: React.FC = () => {
           placeholder='Please repeat your password'
           handleChange={() => console.log('handling change')}
         />
+        <Checkbox label='Want to receive a newsletter?' isChecked={false} handleChange={() => console.log('handling change')} />
       </div>
       <button>Submit</button>
     </StyledForm>
