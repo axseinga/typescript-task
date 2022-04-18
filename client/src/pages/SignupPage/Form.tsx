@@ -2,6 +2,7 @@ import React from 'react';
 import { StyledForm } from './styled/Form.styled';
 import { Input } from '../../components/Input';
 import { Checkbox } from '../../components/Checkbox';
+import { Button } from '../../components/Button';
 
 export const Form: React.FC = () => {
   return (
@@ -50,7 +51,9 @@ export const Form: React.FC = () => {
         />
         <Checkbox label='Want to receive a newsletter?' isChecked={false} handleChange={() => console.log('handling change')} />
       </div>
-      <button>Submit</button>
+      <Button type='submit' base handleClick={() => console.log('handling this click')}>
+        Submit
+      </Button>
     </StyledForm>
   );
 };
