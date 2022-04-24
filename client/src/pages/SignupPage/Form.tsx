@@ -1,12 +1,30 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { StyledForm } from './styled/Form.styled';
 import { Input } from '../../components/Input';
 import { Checkbox } from '../../components/Checkbox';
 import { Button } from '../../components/Button';
 
+interface FormTypes {
+  firstName: string;
+}
+
 export const Form: React.FC = () => {
+  const defaultValues: FormTypes = {
+    firstName: '',
+  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormTypes>();
+
+  const onSubmit = (formData: FormTypes) => {
+    console.log('submitting');
+  };
+
   return (
-    <StyledForm>
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <h1>Sign up</h1>
       <div>
         <Input
@@ -15,9 +33,11 @@ export const Form: React.FC = () => {
           type='text'
           value=''
           placeholder='Please enter your name'
-          handleChange={() => console.log('handling change')}
+          register={register}
+          rules={{ required: 'This field is required' }}
+          errors={errors}
         />
-        <Input
+        {/* <Input
           name='lastName'
           label='Last name'
           type='text'
@@ -48,10 +68,10 @@ export const Form: React.FC = () => {
           value=''
           placeholder='Please repeat your password'
           handleChange={() => console.log('handling change')}
-        />
+        /> */}
         <Checkbox label='Want to receive a newsletter?' isChecked={false} handleChange={() => console.log('handling change')} />
       </div>
-      <Button type='submit' primary handleClick={() => console.log('handling this click')}>
+      <Button type='submit' primary>
         Submit
       </Button>
     </StyledForm>

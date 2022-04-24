@@ -5,16 +5,22 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label: string;
   type: 'text' | 'number' | 'email' | 'password';
-  value: string;
   placeholder: string;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  register: any;
+  rules?: any;
+  errors?: any;
 }
 
-export const Input: React.FC<InputProps> = ({ name, label, type, value, placeholder, handleChange }) => {
+export const Input: React.FC<InputProps> = ({ name, label, type, placeholder, rules, register, errors }) => {
+  const errorMsg = errors[name]?.message;
+  console.log(errorMsg);
+  const hasError = Boolean(errors && errorMsg);
+
   return (
     <StyledInput>
       <label htmlFor={name}>{label}</label>
-      <input type={type} id={name} name={name} value={value} onChange={handleChange} placeholder={placeholder} />
+      <input type={type} id={name} name={name} placeholder={placeholder} {...(register && register(name, rules))} />
+      {hasError && <p>{errorMsg}</p>}
     </StyledInput>
   );
 };
