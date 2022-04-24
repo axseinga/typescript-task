@@ -25,7 +25,6 @@ export const Form: React.FC = () => {
   const [checkboxValue, setCheckboxValue] = useState<boolean>(false);
 
   const onSubmit = (formData: FormTypes) => {
-    console.log(formData);
     formData.newsletter = checkboxValue;
     console.log(formData);
   };
