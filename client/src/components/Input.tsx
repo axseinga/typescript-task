@@ -1,25 +1,28 @@
-import React, { InputHTMLAttributes, ChangeEvent } from 'react';
+import React, { InputHTMLAttributes } from 'react';
+import { Path, RegisterOptions, DeepMap, FieldErrors, UseFormRegister } from 'react-hook-form';
 import { StyledInput } from './styled/Input.styled';
+import { FormTypes } from '../pages/SignupPage/Form';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  name: string;
+type InputProps = {
+  name: Path<FormTypes>;
   label: string;
   type: 'text' | 'number' | 'email' | 'password';
   placeholder: string;
-  register: any;
-  rules?: any;
-  errors?: any;
-}
+  register: UseFormRegister<FormTypes>;
+  rules?: RegisterOptions;
+  errors?: Partial<DeepMap<FormTypes, FieldErrors>>;
+};
 
 export const Input: React.FC<InputProps> = ({ name, label, type, placeholder, rules, register, errors }) => {
-  const errorMsg = errors[name]?.message;
-  console.log(errorMsg);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const errorMsg = errors?.[name]?.message;
   const hasError = Boolean(errors && errorMsg);
 
   return (
     <StyledInput>
       <label htmlFor={name}>{label}</label>
-      <input type={type} id={name} name={name} placeholder={placeholder} {...(register && register(name, rules))} />
+      <input type={type} id={name} placeholder={placeholder} {...(register && register(name, rules))} name={name} />
       {hasError && <p>{errorMsg}</p>}
     </StyledInput>
   );

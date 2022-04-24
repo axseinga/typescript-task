@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledInput = styled.div`
-  margin: 1.5rem 0;
+  margin: 2rem 0;
   display: flex;
   flex-direction: column;
   height: 50px;
@@ -16,6 +16,7 @@ export const StyledInput = styled.div`
     font-size: 0.7rem;
     margin-bottom: 0.3rem;
     margin-left: 1px;
+    margin: 0.4rem 2px 0;
   }
   & input {
     border: 1px solid ${({ theme }) => theme.color.disabled};

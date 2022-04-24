@@ -5,13 +5,15 @@ import { Input } from '../../components/Input';
 import { Checkbox } from '../../components/Checkbox';
 import { Button } from '../../components/Button';
 
-interface FormTypes {
+export interface FormTypes {
   firstName: string;
+  lastName: string;
 }
 
 export const Form: React.FC = () => {
   const defaultValues: FormTypes = {
     firstName: '',
+    lastName: '',
   };
   const {
     register,
@@ -31,20 +33,21 @@ export const Form: React.FC = () => {
           name='firstName'
           label='First name'
           type='text'
-          value=''
           placeholder='Please enter your name'
           register={register}
-          rules={{ required: 'This field is required' }}
+          rules={{ required: 'This field is required', minLength: { value: 3, message: 'Name needs to have at least 3 characters' } }}
           errors={errors}
         />
-        {/* <Input
+        <Input
           name='lastName'
           label='Last name'
           type='text'
-          value=''
           placeholder='Please enter your surname'
-          handleChange={() => console.log('handling change')}
+          register={register}
+          rules={{ required: 'This field is required', minLength: { value: 3, message: 'Surname needs to have at least 3 characters' } }}
+          errors={errors}
         />
+        {/*
         <Input
           name='email'
           label='Email'
