@@ -17,9 +17,6 @@ export const Input: React.FC<InputProps> = ({ name, label, type, placeholder, re
   // @ts-ignore
   const errorMsg = errors?.[name]?.message;
   const hasError = Boolean(errors && errorMsg);
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  console.log(errors[name]);
 
   return (
     <StyledInput>

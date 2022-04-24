@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { formSchema } from '../../utils/formValidation';
@@ -13,6 +13,7 @@ export interface FormTypes {
   email: string;
   password: string;
   passwordRepeat: string;
+  newsletter?: boolean;
 }
 
 export const Form: React.FC = () => {
@@ -21,9 +22,12 @@ export const Form: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormTypes>({ resolver: joiResolver(formSchema) });
+  const [checkboxValue, setCheckboxValue] = useState<boolean>(false);
 
   const onSubmit = (formData: FormTypes) => {
-    console.log('submitting');
+    console.log(formData);
+    formData.newsletter = checkboxValue;
+    console.log(formData);
   };
 
   return (
@@ -49,7 +53,12 @@ export const Form: React.FC = () => {
           register={register}
           errors={errors}
         />
-        <Checkbox label='Want to receive a newsletter?' isChecked={false} handleChange={() => console.log('handling change')} />
+        <Checkbox
+          type='checkbox'
+          label='Want to receive a newsletter?'
+          isChecked={checkboxValue}
+          handleChange={() => setCheckboxValue(!checkboxValue)}
+        />
       </div>
       <Button type='submit' primary>
         Submit

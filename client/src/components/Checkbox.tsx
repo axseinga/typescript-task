@@ -3,6 +3,7 @@ import { StyledCheckbox } from './styled/Checkbox.styled';
 
 interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  type: 'checkbox';
   isChecked: boolean;
   defaultChecked?: boolean;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
