@@ -1,10 +1,17 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
+import {
+    IGetUsersReq,
+    IGetUserReq,
+    ICreateUserReq,
+    IUpdateUserEmailReq,
+    IDeleteUserReq,
+} from "./users.model";
 
 const prisma = new PrismaClient();
 
-export const getAllUsers = async (req: Request, res: Response) => {
+export const getAllUsers = async (req: IGetUsersReq, res: Response) => {
     try {
         const users = await prisma.user.findMany();
 
@@ -27,7 +34,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
     }
 };
 
-export const getUser = async (req: Request, res: Response) => {
+export const getUser = async (req: IGetUserReq, res: Response) => {
     try {
         const id = Number(req.params.id);
 
@@ -55,7 +62,7 @@ export const getUser = async (req: Request, res: Response) => {
     }
 };
 
-export const createUser = async (req: Request, res: Response) => {
+export const createUser = async (req: ICreateUserReq, res: Response) => {
     try {
         const { firstName, lastName, email, password, newsletter } = req.body;
 
@@ -96,7 +103,10 @@ export const createUser = async (req: Request, res: Response) => {
 
 // route / instead of /:id ??? /
 
-export const updateUserEmail = async (req: Request, res: Response) => {
+export const updateUserEmail = async (
+    req: IUpdateUserEmailReq,
+    res: Response
+) => {
     try {
         const { email } = req.body;
         const id = Number(req.params.id);
@@ -122,7 +132,7 @@ export const updateUserEmail = async (req: Request, res: Response) => {
     }
 };
 
-export const deleteUser = async (req: Request, res: Response) => {
+export const deleteUser = async (req: IDeleteUserReq, res: Response) => {
     try {
         const id = Number(req.params.id);
 
