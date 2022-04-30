@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
 import {
+    IUser,
     IGetUsersReq,
     IGetUserReq,
     ICreateUserReq,
@@ -61,18 +62,19 @@ export const getUser = async (req: IGetUserReq, res: Response) => {
 
 export const createUser = async (req: ICreateUserReq, res: Response) => {
     try {
-        const { firstName, lastName, email, password, newsletter } = req.body;
+        const { firstName, lastName, email, password, newsletter }: IUser =
+            req.body;
 
-        const emailExists = await prisma.user.findUnique({
+        const userExists = await prisma.user.findUnique({
             where: {
                 email: email,
             },
         });
 
-        if (emailExists) return res.status(400).send("Email already exists.");
+        if (userExists) return res.status(400).send("Email already exists.");
 
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
+        const hashedPassword: string = await bcrypt.hash(password, salt);
 
         const user = await usersServices.createUser({
             firstName: firstName,
@@ -95,8 +97,6 @@ export const createUser = async (req: ICreateUserReq, res: Response) => {
         });
     }
 };
-
-// route / instead of /:id ??? /
 
 export const updateUserEmail = async (
     req: IUpdateUserEmailReq,
@@ -124,7 +124,7 @@ export const deleteUser = async (req: IDeleteUserReq, res: Response) => {
     try {
         const id = Number(req.params.id);
 
-        const deletedUser = await usersServices.deleteUser(id);
+        await usersServices.deleteUser(id);
 
         res.status(204).json({
             status: "success",
