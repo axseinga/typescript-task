@@ -1,11 +1,16 @@
 {
-  "name": "typescript",
-  "version": "1.0.0",
-  "description": "Typescript project with front and backend as task to practise types.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Agnieszka Urbanowicz",
-  "license": "ISC"
+    "name": "typescript",
+    "version": "1.0.0",
+    "description": "Typescript project with front and backend as task to practise types.",
+    "main": "index.js",
+    "scripts": {
+        "prepare": "concurrently -n server,client \"npm --prefix server install\" \"npm --prefix client install\"",
+        "start:dev": "concurrently -n server,client \"npm --prefix server run start:watch\" \"npm --prefix client start\"",
+        "build": "concurrently -n server,client \"npm --prefix server run build\" \"npm --prefix client run build\""
+    },
+    "author": "Agnieszka Urbanowicz",
+    "license": "ISC",
+    "dependencies": {
+        "concurrently": "^7.1.0"
+    }
 }
