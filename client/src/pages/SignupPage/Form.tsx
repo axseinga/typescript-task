@@ -7,22 +7,22 @@ import { Input } from '../../components/Input';
 import { Checkbox } from '../../components/Checkbox';
 import { Button } from '../../components/Button';
 
-export interface FormTypes {
+export type FormTypes = {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
   passwordRepeat: string;
   newsletter?: boolean;
-}
+};
 
-export const Form: React.FC = () => {
+export const Form = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormTypes>({ resolver: joiResolver(formSchema) });
-  const [checkboxValue, setCheckboxValue] = useState<boolean>(false);
+  const [checkboxValue, setCheckboxValue] = useState(false);
 
   const onSubmit = (formData: FormTypes) => {
     formData.newsletter = checkboxValue;
@@ -30,7 +30,7 @@ export const Form: React.FC = () => {
   };
 
   return (
-    <StyledForm /*novalidate ??? ts error*/ onSubmit={handleSubmit(onSubmit)}>
+    <StyledForm noValidate onSubmit={handleSubmit(onSubmit)}>
       <h1>Sign up</h1>
       <div>
         <Input name='firstName' label='First name' type='text' placeholder='Please enter your name' register={register} errors={errors} />

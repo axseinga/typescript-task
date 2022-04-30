@@ -12,9 +12,7 @@ type InputProps = {
   errors?: Partial<DeepMap<FormTypes, FieldErrors>>;
 };
 
-export const Input: React.FC<InputProps> = ({ name, label, type, placeholder, register, errors }) => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+export const Input = ({ name, label, type, placeholder, register, errors }: InputProps) => {
   const errorMsg: string = errors?.[name]?.message;
   const hasError = Boolean(errors && errorMsg);
 

@@ -9,7 +9,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({ type, children, handleClick, disabled, primary }) => {
+export const Button = ({ type, children, handleClick, disabled, primary }: ButtonProps) => {
   return (
     <StyledButton type={type} onClick={handleClick} disabled={disabled} primary={primary}>
       {children ? <div>{children}</div> : null}
