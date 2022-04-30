@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const StyledWelcomePage = styled.section`
   background-color: ${({ theme }) => theme.color.bg};
@@ -35,3 +36,5 @@ export const StyledWelcomeModal = styled.div`
     }
   }
 `;
+
+export const StyledNavLink = styled(NavLink)``;
