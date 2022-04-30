@@ -1,10 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcryptjs";
-import { IUser } from "./users.model";
+import { IUser, rawUserType } from "./users.model";
 
 const prisma = new PrismaClient();
 
-export const getAllUsers = async () => {
+const getAllUsers = async (): Promise<IUser[]> => {
     try {
         const users = await prisma.user.findMany();
         return users;
@@ -13,7 +12,7 @@ export const getAllUsers = async () => {
     }
 };
 
-export const getUser = async (id: number) => {
+const getUser = async (id: number): Promise<IUser> => {
     try {
         const user = await prisma.user.findUnique({
             where: {
@@ -26,26 +25,24 @@ export const getUser = async (id: number) => {
     }
 };
 
-export const createUser = async (newUser: IUser) => {
+const createUser = async (newUser: rawUserType): Promise<IUser> => {
     try {
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(newUser.password, salt);
-
         const user = await prisma.user.create({
             data: {
                 firstName: newUser.firstName,
                 lastName: newUser.lastName,
                 email: newUser.email,
-                password: hashedPassword,
+                password: newUser.password,
                 newsletter: newUser.newsletter,
             },
         });
+        return user;
     } catch (error) {
         throw Error("Error while creating user");
     }
 };
 
-export const updateUserEmail = async (id: number, email: string) => {
+const updateUserEmail = async (id: number, email: string): Promise<IUser> => {
     try {
         const updatedUser = await prisma.user.update({
             where: {
@@ -61,7 +58,7 @@ export const updateUserEmail = async (id: number, email: string) => {
     }
 };
 
-export const deleteUser = async (id: number) => {
+const deleteUser = async (id: number): Promise<IUser> => {
     try {
         const deletedUser = await prisma.user.delete({
             where: {
@@ -73,4 +70,12 @@ export const deleteUser = async (id: number) => {
     } catch (error) {
         throw Error("Error while deleting user");
     }
+};
+
+export const usersServices = {
+    getAllUsers,
+    getUser,
+    createUser,
+    updateUserEmail,
+    deleteUser,
 };

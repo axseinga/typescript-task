@@ -8,12 +8,13 @@ import {
     IUpdateUserEmailReq,
     IDeleteUserReq,
 } from "./users.model";
+import { usersServices } from "./users.services";
 
 const prisma = new PrismaClient();
 
 export const getAllUsers = async (req: IGetUsersReq, res: Response) => {
     try {
-        const users = await prisma.user.findMany();
+        const users = await usersServices.getAllUsers();
 
         if (users.length === 0) {
             return res.status(404).json({
@@ -38,11 +39,7 @@ export const getUser = async (req: IGetUserReq, res: Response) => {
     try {
         const id = Number(req.params.id);
 
-        const user = await prisma.user.findUnique({
-            where: {
-                id: id,
-            },
-        });
+        const user = await usersServices.getUser(id);
 
         if (!user) {
             return res.status(404).json({
@@ -77,14 +74,12 @@ export const createUser = async (req: ICreateUserReq, res: Response) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        const user = await prisma.user.create({
-            data: {
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                password: hashedPassword,
-                newsletter: newsletter,
-            },
+        const user = await usersServices.createUser({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: hashedPassword,
+            newsletter: newsletter,
         });
 
         res.status(201).json({
@@ -111,14 +106,7 @@ export const updateUserEmail = async (
         const { email } = req.body;
         const id = Number(req.params.id);
 
-        const updatedUser = await prisma.user.update({
-            where: {
-                id: id,
-            },
-            data: {
-                email: email,
-            },
-        });
+        const updatedUser = await usersServices.updateUserEmail(id, email);
 
         res.status(200).json({
             status: "success",
@@ -136,11 +124,7 @@ export const deleteUser = async (req: IDeleteUserReq, res: Response) => {
     try {
         const id = Number(req.params.id);
 
-        const deletedUser = await prisma.user.delete({
-            where: {
-                id: id,
-            },
-        });
+        const deletedUser = await usersServices.deleteUser(id);
 
         res.status(204).json({
             status: "success",
