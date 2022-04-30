@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
 
 const prisma = new PrismaClient();
@@ -58,12 +59,23 @@ export const createUser = async (req: Request, res: Response) => {
     try {
         const { firstName, lastName, email, password, newsletter } = req.body;
 
+        const emailExists = await prisma.user.findUnique({
+            where: {
+                email: email,
+            },
+        });
+
+        if (emailExists) return res.status(400).send("Email already exists.");
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
         const user = await prisma.user.create({
             data: {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
-                password: password,
+                password: hashedPassword,
                 newsletter: newsletter,
             },
         });

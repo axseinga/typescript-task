@@ -4,7 +4,7 @@ import cors from "cors";
 import routes from "./api/routes";
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(compression());
 app.use(express.json());
