@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyledPlaygroundPage, StyledUsersList, StyledNavLink } from './styled/PlaygroundPage.styled';
 import { UsersState } from '../../state/usersState';
 import { TiTick } from 'react-icons/ti';
@@ -8,9 +8,11 @@ import { IoChevronBackCircle } from 'react-icons/io5';
 import { theme } from '../../styles/theme';
 import { Button } from '../../components/Button';
 import { getAllUsers, deleteUserById } from '../../services/usersService';
+import { Modal } from '../../components/Modal';
 
 export const PlaygroundPage = () => {
   const { users, setUsers } = UsersState();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleUpdate = async (id: number) => {
     console.log('handling update');
@@ -60,6 +62,7 @@ export const PlaygroundPage = () => {
           })}
         </tbody>
       </StyledUsersList>
+      <Modal isOpen={isOpen} handleOpen={setIsOpen} text='Please write a new email address' />
     </StyledPlaygroundPage>
   );
 };

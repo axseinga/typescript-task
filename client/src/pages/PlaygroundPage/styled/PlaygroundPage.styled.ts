@@ -52,4 +52,5 @@ export const StyledUsersList = styled.table`
 
 export const StyledNavLink = styled(NavLink)`
   margin-bottom: 1rem;
+  align-self: flex-start;
 `;
