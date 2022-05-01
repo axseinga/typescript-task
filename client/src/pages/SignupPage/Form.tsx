@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { formSchema } from '../../utils/formValidation';
 import { StyledForm } from './styled/Form.styled';
 import { Input } from '../../components/Input';
 import { Checkbox } from '../../components/Checkbox';
 import { Button } from '../../components/Button';
+import { createUser, getAllUsers } from '../../services/usersService';
+import { UsersState } from '../../state/usersState';
 
 export type FormTypes = {
   firstName: string;
@@ -13,7 +16,7 @@ export type FormTypes = {
   email: string;
   password: string;
   passwordRepeat: string;
-  newsletter?: boolean;
+  newsletter: boolean;
 };
 
 export const Form = () => {
@@ -24,9 +27,20 @@ export const Form = () => {
   } = useForm<FormTypes>({ resolver: joiResolver(formSchema) });
   const [checkboxValue, setCheckboxValue] = useState(false);
 
-  const onSubmit = (formData: FormTypes) => {
+  const { setUsers } = UsersState();
+  const navigate = useNavigate();
+
+  const onSubmit = async (formData: FormTypes) => {
     formData.newsletter = checkboxValue;
-    console.log(formData);
+    await createUser(formData);
+    const res = await getAllUsers();
+
+    if (res) {
+      setUsers(res);
+      navigate('/');
+    } else {
+      // show message
+    }
   };
 
   return (

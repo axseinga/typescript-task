@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const StyledPlaygroundPage = styled.section`
   background-color: white;
@@ -10,12 +11,6 @@ export const StyledPlaygroundPage = styled.section`
   box-shadow: ${({ theme }) => theme.shadow.box};
   height: 70vh;
   width: 60vw;
-
-  & > div {
-    & button {
-      align-self: center;
-    }
-  }
 `;
 
 export const StyledUsersList = styled.table`
@@ -35,7 +30,26 @@ export const StyledUsersList = styled.table`
     tr {
       th {
         padding: 0.5rem;
+
+        & button {
+          background-color: transparent;
+          padding: 0.2rem;
+
+          &:hover {
+            color: ${({ theme }) => theme.color.primary};
+          }
+        }
+
+        &:last-child {
+          display: flex;
+          justify-content: space-around;
+          padding: 0 1rem;
+        }
       }
     }
   }
+`;
+
+export const StyledNavLink = styled(NavLink)`
+  margin-bottom: 1rem;
 `;

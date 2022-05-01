@@ -11,6 +11,7 @@ declare module 'styled-components' {
       active: string;
       error: string;
       bg: string;
+      green: string;
     };
     font: {
       fontPoppins: string;
@@ -32,6 +33,7 @@ export const theme: DefaultTheme = {
     active: '#5034db',
     error: '#ff2869',
     bg: '#f5f3fd',
+    green: '#00e038',
   },
   font: {
     fontPoppins: 'Poppins, sans-serif',

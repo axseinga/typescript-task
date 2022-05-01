@@ -4,7 +4,7 @@ import { StyledButton } from './styled/Button.styled';
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   type: 'button' | 'submit' | 'reset';
-  handleClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  handleClick?: (event: React.MouseEvent<HTMLButtonElement>, id?: string) => void;
   primary?: boolean;
   disabled?: boolean;
 }
