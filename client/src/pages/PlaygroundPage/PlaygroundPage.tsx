@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyledPlaygroundPage } from './styled/PlaygroundPage.styled';
 import { Button } from '../../components/Button';
+import { getUsers } from '../../services/usersService';
 
 export const PlaygroundPage = () => {
   return (
