@@ -1,7 +1,5 @@
 import create from 'zustand';
 
-// add type for users when everything works with zustand
-
 type UserType = {
   id: number;
   firstName: string;
@@ -12,15 +10,16 @@ type UserType = {
 };
 
 type UsersStateType = {
-  users: any | null;
-  setUsers: (users: any) => void;
+  users: UserType[] | void;
+  setUsers: (users: UserType[] | void) => void;
 };
 
 export const UsersState = create<UsersStateType>((set, get) => {
   return {
-    users: {},
+    users: [],
     setUsers(users) {
       set({ users });
+      return users;
     },
     action: () => {
       const users = get().users;

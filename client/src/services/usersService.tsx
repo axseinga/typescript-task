@@ -16,7 +16,7 @@ export const getAllUsers = async (): Promise<UserType[] | void> => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const response = await axios.get(baseUrl);
-    return response?.data?.data;
+    return response?.data?.data?.users;
   } catch (error) {
     throw new Error(`Cannot get users. Error: ${error}`);
   }
