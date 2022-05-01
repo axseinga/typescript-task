@@ -11,12 +11,12 @@ type UserType = {
   newsletter: boolean;
 };
 
-export const getUsers = async (): Promise<UserType[] | void> => {
+export const getAllUsers = async (): Promise<UserType[] | void> => {
   try {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const response = await axios.get(baseUrl);
-    return response.data;
+    return response?.data?.data;
   } catch (error) {
     throw new Error(`Cannot get users. Error: ${error}`);
   }

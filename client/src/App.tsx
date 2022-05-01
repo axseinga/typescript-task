@@ -4,10 +4,22 @@ import { PagesRoutes } from './routes/Routes';
 import { GlobalStyle } from './styles/globalStyle';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
+import { UsersState } from './state/usersState';
+import { getAllUsers } from './services/usersService';
 import { StyledApp } from './styles/App.styled';
-import { getUsers } from './services/usersService';
 
 const App = () => {
+  const { users, setUsers } = UsersState();
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const res = await getAllUsers();
+      setUsers(res);
+    };
+
+    fetchUsers();
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
