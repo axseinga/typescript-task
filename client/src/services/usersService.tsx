@@ -2,24 +2,19 @@ import axios from 'axios';
 
 const baseUrl = process.env.REACT_APP_API;
 
-type UserType = {
+interface UserI {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
   newsletter: boolean;
-};
+}
 
-type UserStateType = {
+interface UserStateI extends UserI {
   id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  newsletter: boolean;
-};
+}
 
-export const getAllUsers = async (): Promise<UserStateType[] | void> => {
+export const getAllUsers = async (): Promise<UserStateI[] | void> => {
   try {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -30,7 +25,7 @@ export const getAllUsers = async (): Promise<UserStateType[] | void> => {
   }
 };
 
-export const getUserById = async (id: number): Promise<UserStateType | void> => {
+export const getUserById = async (id: number): Promise<UserStateI | void> => {
   try {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -41,7 +36,7 @@ export const getUserById = async (id: number): Promise<UserStateType | void> => 
   }
 };
 
-export const createUser = async (user: UserType): Promise<UserStateType | void> => {
+export const createUser = async (user: UserI): Promise<UserStateI | void> => {
   try {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -52,7 +47,7 @@ export const createUser = async (user: UserType): Promise<UserStateType | void> 
   }
 };
 
-export const updateUserEmailById = async (id: number, email: string): Promise<UserStateType | void> => {
+export const updateUserEmailById = async (id: number, email: string): Promise<UserStateI | void> => {
   try {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
