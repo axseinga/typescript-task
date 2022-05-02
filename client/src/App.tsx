@@ -12,7 +12,7 @@ const App = () => {
   const { users, setUsers } = UsersState();
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchUsers = async (): Promise<void> => {
       const res = await getAllUsers();
       setUsers(res);
     };

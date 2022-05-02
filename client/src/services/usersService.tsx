@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = process.env.REACT_APP_API;
+const baseUrl: string = process.env.REACT_APP_API || '';
 
 interface UserI {
   firstName: string;
@@ -16,8 +16,6 @@ interface UserStateI extends UserI {
 
 export const getAllUsers = async (): Promise<UserStateI[] | void> => {
   try {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     const response = await axios.get(baseUrl);
     return response?.data?.data?.users;
   } catch (error) {
@@ -27,8 +25,6 @@ export const getAllUsers = async (): Promise<UserStateI[] | void> => {
 
 export const getUserById = async (id: number): Promise<UserStateI | void> => {
   try {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     const response = await axios.get(`${baseUrl}${id}`);
     return response.data;
   } catch (error) {
@@ -38,8 +34,6 @@ export const getUserById = async (id: number): Promise<UserStateI | void> => {
 
 export const createUser = async (user: UserI): Promise<UserStateI | void> => {
   try {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     const response = await axios.post(baseUrl, user);
     return response.data;
   } catch (error) {
@@ -49,8 +43,6 @@ export const createUser = async (user: UserI): Promise<UserStateI | void> => {
 
 export const updateUserEmailById = async (id: number, email: string): Promise<UserStateI | void> => {
   try {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     console.log(id, email);
     const response = await axios.put(`${baseUrl}${id}`, { email });
     return response.data;
@@ -61,8 +53,6 @@ export const updateUserEmailById = async (id: number, email: string): Promise<Us
 
 export const deleteUserById = async (id: number): Promise<null | void> => {
   try {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     const response = await axios.delete(`${baseUrl}${id}`);
     return response.data;
   } catch (error) {
