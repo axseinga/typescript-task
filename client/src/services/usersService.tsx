@@ -56,7 +56,8 @@ export const updateUserEmailById = async (id: number, email: string): Promise<Us
   try {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const response = await axios.get(`${baseUrl}${id}`);
+    console.log(id, email);
+    const response = await axios.put(`${baseUrl}${id}`, { email });
     return response.data;
   } catch (error) {
     throw new Error(`Cannot update user's email. Error: ${error}`);

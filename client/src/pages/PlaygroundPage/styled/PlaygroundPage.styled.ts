@@ -11,6 +11,7 @@ export const StyledPlaygroundPage = styled.section`
   box-shadow: ${({ theme }) => theme.shadow.box};
   height: 70vh;
   width: 60vw;
+  position: relative;
 `;
 
 export const StyledUsersList = styled.table`
