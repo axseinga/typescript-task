@@ -34,6 +34,11 @@ export const PlaygroundPage = () => {
         <StyledNavLink to={'/'}>
           <IoChevronBackCircle size={30} color={theme.color.primary} />
         </StyledNavLink>
+        <StyledNavLink to={'/signup'}>
+          <Button type='button' primary>
+            Add user
+          </Button>
+        </StyledNavLink>
         <StyledUsersList>
           <thead>
             <tr>
