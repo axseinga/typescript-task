@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import { Path, DeepMap, FieldErrors, UseFormRegister } from 'react-hook-form';
 import { StyledInput } from './styled/Input.styled';
 import { FormTypes } from '../pages/SignupPage/Form';
 
-type InputProps = {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: Path<FormTypes>;
   label: string;
   type: 'text' | 'number' | 'email' | 'password';
   placeholder: string;
   register: UseFormRegister<FormTypes>;
   errors?: Partial<DeepMap<FormTypes, FieldErrors>>;
-};
+}
 
 export const Input = ({ name, label, type, placeholder, register, errors }: InputProps) => {
   const errorMsg: string = errors?.[name]?.message;
